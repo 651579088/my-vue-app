@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.idea
+dist.zip
+.vscode
+src/util/env.js
+.happypack
