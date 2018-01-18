@@ -3,14 +3,33 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+var crossDomain = require('./cross.domain')
+var isProd = process.argv[2] === 'prod'
+var isGray = process.argv[2] === 'gray'
+// console.log('获取package.json，script配置值', isProd, isGray)
+
+// 配置跨域用的
+var crossDomainObj = {}
+if (crossDomain.ispathObj.ispathNUm === 1) {
+  crossDomainObj = {
+    '/api':{
+      target: crossDomain.ispathObj.ispathText,
+      changeOrigin: true
+    }
+  }
+}
 
 module.exports = {
+  isProd: isProd,
+  isGray: isGray,
+  crossDomainObj: crossDomainObj,
   dev: {
 
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    // 本地跨域请求问题
+    proxyTable: crossDomainObj,
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -56,7 +75,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: isProd ? 'https://www.baidu.com/' : isGray ? 'https://www.google.com/' : '/',
 
     /**
      * Source Maps

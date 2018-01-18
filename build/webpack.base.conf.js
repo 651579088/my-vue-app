@@ -28,6 +28,7 @@ var webpackConfig = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
+    // 当打包代码托管到cdm时，可改变assetdPublicPath
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
@@ -35,8 +36,11 @@ var webpackConfig = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      // 给路径取别名
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      'src': resolve('src'),
+      'assets': resolve('src/assets'),
+      'components': resolve('src/components')
     }
   },
   module: {
